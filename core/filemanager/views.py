@@ -57,6 +57,8 @@ def get(request: HttpRequest):
         'id': document.id,
         'name': document.name,
         'title': document.title,
+        'category': document.category,
+        'communication': document.communication,
         'description': document.description,
         'file': document.file.url
     }
@@ -67,7 +69,7 @@ def get(request: HttpRequest):
 @requires_csrf_token
 def add(request: HttpRequest):
     details = request.POST.dict()
-    params = ['name', 'title', 'description']
+    params = ['name', 'title', 'category', 'communication', 'description']
 
     if not paramutils.validate_params(details, params):
         return JsonResponse({
@@ -77,6 +79,8 @@ def add(request: HttpRequest):
 
     name = details.get('name')
     title = details.get('title')
+    category = details.get('category')
+    communication = details.get('communication')
     description = details.get('description')
     file = request.FILES.get('file')
 
@@ -89,6 +93,8 @@ def add(request: HttpRequest):
     data = {
         'name': name,
         'title': title,
+        'category': category,
+        'communication': communication,
         'description': description,
         'file': file
     }
@@ -101,7 +107,7 @@ def add(request: HttpRequest):
 @requires_csrf_token
 def edit(request: HttpRequest):
     details = request.POST.dict()
-    params = ['id', 'name', 'title', 'description']
+    params = ['id', 'name', 'title', 'category', 'communication', 'description']
 
     if not paramutils.validate_params(details, params):
         return JsonResponse({
@@ -112,6 +118,8 @@ def edit(request: HttpRequest):
     id = details.get('id')
     name = details.get('name')
     title = details.get('title')
+    category = details.get('category')
+    communication = details.get('communication')
     description = details.get('description')
     
     try:
@@ -124,6 +132,8 @@ def edit(request: HttpRequest):
     
     document.name = name
     document.title = title
+    document.category = category
+    document.communication = communication
     document.description = description
     document.save()
     return redirect('/filemanager')

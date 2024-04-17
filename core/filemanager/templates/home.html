@@ -57,7 +57,33 @@
                 {% for document in documents %}
                 <div
                     class="backdrop-blur-sm bg-white/20 p-6 rounded-md shadow-sm cursor-pointer border-2 border-gray-50 hover:border-violet-200 hover:border-2 transition-colors duration-300">
-                    <h2 class="text-xl font-semibold mb-4">#{{ document.id }} | {{ document.title }}</h2>
+                    <div class="flex flex-row justify-between items-center">
+                        <h2 class="text-xl font-semibold mb-4">#{{ document.id }} | {{ document.title }}</h2>
+
+                        {% if document.communication == 'incoming' %}
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>Incoming</title>
+                                <rect width="48" height="48" fill="url(#pattern0_22_4)"/>
+                                <defs>
+                                <pattern id="pattern0_22_4" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_22_4" transform="scale(0.0104167)"/>
+                                </pattern>
+                                <image id="image0_22_4" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEDElEQVR4nO2cv2tUQRDHHwoKgvYqamejEEGwsrC00GjhkcxcTGGRTrRJdnIpLqUgivijCFhobieBFCIExEILO0XEItibSP4AY6yMKBsucmpyufd2783uZT4wkCJ5b/b73d3vu2zyskxpCzH+alftf1rxRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QRg0QJjoDxmYGTxiLDwzDJ2JY3a7Bbpex+M0wnO20f8MwKdYrw2Rh4a+/OL+3KfxPadEpQRO8xK/PVfaQxZfSQlOiJniJ7yCGu9ICU6Im+Is/O3CcLK5Ji0sJmuAtfrPB29KiUoImBBHfQRbfSwtKhQpWTaN6ruNxMppg97ZYz0IxznCZGL7IC4pJrIRgM7+V+tTIPmK8lVIWkMRKCDnzN6Nm8RRZfCcvKsZnQrfF36Ber+8ixhFiWJEXFuMwoSzxWxmdGTxEjHO0002wAuK3YhguEsPijjTBCoufbkiDvwmxiJ9uSENxE8oUnxie1Z4MH+70+ytzld3UqN50z+DyImPwzwmdPuc7zZx2mS/rjTJ8dzPAidt7IQ25VkKnT4mG4au7vvcF/5oxDB/HGM70XkhDEBPM9FCfsfi29drBj+SaBzJTo4+v7e+tkIbCJmyMz1j88e91M1/aNLxIjWp/zmudNgwf5MXGrcb0Js82uz6mRrW/3QrPLfgmorVt2jDMm6dXjxbdIymCKpJxtUb1oGGY3u7amS/dGkAsIW0Y5icsHuvWBMp8yTmYdELa4rJhGPYN2agMSCGkTbO/eqN6oIz+Ml98Zth4o3olpk/SpsAKJYsXDMPnovfMLfh/DfgPWjykTRdDNnoDfELaBBBAegJkvoSahaWHtMVlYqzkutf0UF/oLTDzJWQzZYS0KTlkkzPAZ4bWtgnpoivMJ2TTNSDgHm0EQzZ5A2i9YMUw3Mgj4MTswBFieO7Kfd3pz7l7uHuV9UcFWRoGYOEtJPYTO++my2yWCoZozL8O926+7IbJI6RjPBBK1wAuFtKhP8jteAMo51NObOcNmS/SA6AcIR3jn8X0lAG0RUjHfObccwbQhhEWl4zFS81aku5nxxlAiZQawGqA+CwkXQHyQpBuQfJikEBpBrAaID4LSVeAvBCkW5C8GCRQmgGsBojPQtIVIC8E6RYkLwYJlGYAqwHis5B0BcgLQaluQSn8wzVFWu5c2t+A9Re0yg+GEizDsOAfwhbvSQ+EEi1j8Y63AePTQydjPOym2MvimnvNcxYCY/GR+IA4sbJ4PwtF89XFr8UHxWmUYXjlNAtmwB8TGB7qdoTtZv2am/nBxW/F7WvuXdIu4fURFTfeObTgNAm25yuKoiiKoiiKoiiKoiiKoiiKkvUSvwHSpOa4i5CLMQAAAABJRU5ErkJggg=="/>
+                                </defs>
+                            </svg>
+                        {% elif document.communication == 'outgoing' %}
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <title>Outgoing</title>
+                                <rect width="48" height="48" fill="url(#pattern0_22_5)"/>
+                                <defs>
+                                <pattern id="pattern0_22_5" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_22_5" transform="scale(0.0104167)"/>
+                                </pattern>
+                                <image id="image0_22_5" width="48" height="48" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAADVElEQVR4nO2cv2oUURTGDwoKghZahHtibEzuidFCEHwL0UJfwdbSUktBDOKfwtZyG0UhZO/ZdDZiYRF8AJU8QBLtdlm5iysREt3NTPacO/P94MA2w9zzfXfONzsDQwQmRiU8VOFHkx8B6hZ/+LtggqH4MMGB+DDBgfgwwYH4MMGB+DDBgfgwwYH4MMGB+DDBgfgwwYH4MMGB+DDBgfgwwYH4MMGB+PWZsHFp7rJGfp6Ev2jkH4bNDPcrqplZn+9A1hYXT2bhVXhgLbK2zYDOysoJjbxuLa621YAkYdVaWG2rAbrMUYX71sJqaw2I4bG1qNpuA/iTtajaZgN6MdxKEr5bC6sTVpIFbpQBmXfXwqn8J6KkLNCarhgXBozpLvHVJOGjtWjaVgMyD4iO6XK4myLvWIunbTRgTJ61KqFjLaC21YAxXeEbGvmrtZDaVgNKD2lqggElhzR5NyDF8F5XwoWmhjR5N2B0osg/Uwz3O0THmxbS5J2/Fxw+95bOX29SSJN39ln0IEV+9UHOnW5CSJN3Dlx8DFs9mb9dekiTd/7XwGFDWoW3rcVvhAGlhzR5Z7qGCgrpGLaSzN8h7xyiOe8hPZh2faZU2WH+QjrM/AqlqlRt2kVIR7uMoqrYCsCvS98AVJViR0CcPmSPYgSSLwNmEtIDTzcB5NCAI9yhwd1tMLk1oM4ZHf3+EaSqHPUCdWQC7yQJ96YRcP0iLyTht0n4Tf496XH5HPlcs3pfQVWZxSK1wgjx/jCwMAP4T4iuLZ49U4vqxo/DSzRgWOezGusXQuUaIIcL6cY9bbVuQKe8y2nc+wbrBnSKkG7kGzfrBnSCkG70O2frBvTACt80hpujyr/N19M6A7iIggECA8x3oeIKsBdCMYLsxVCDQgYIDDDfhYorwF4IxQiyF0MNChkgMMB8FyquAHshFCPIXgw1KGSAwADzXai4AuyF0FJHUIq8a92Ellvb1Q3IH2i1b2RYZEXerB7CkZ+aNyJlVpLwpLIB3eW5Kx5fdqv/6ufPPFMdJAkvHTQ0LKlS5GdU66eLJWxYN6XFVOhlzWozYI8JLzCO+F/i9/POr138veS5NvqWdORN3KJyHjW7Iy0krNY28wEAAAAAAAAAAAAAAAAAQE3iF1vO1XWslr+XAAAAAElFTkSuQmCC"/>
+                                </defs>
+                            </svg>
+                        {% endif %}
+                    </div>
                     <p class="text-gray-700 mb-4">{{ document.description }}</p>
                     <p class="text-gray-700 mb-4">Uploaded at: {{document.uploaded_at}}</p>
                     <div class="flex flex-row justify-end space-x-6 sm:mt-4 lg:mt-4 xl:mt-4">
@@ -107,7 +133,42 @@
             <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Document Title</label>
             <input type="text" id="title" name="title" required
                 class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
-            
+
+            <!-- Flex layout for lg and md screens -->
+            <div class="lg:flex">
+                <div class="lg:w-1/2 lg:pr-4">
+                    <label for="communication" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="communication" name="communication" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
+                <div class="lg:w-1/2">
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Communication Type</label>
+                    <select id="category" name="category" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="Accounting">Accounting</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Budget">Budget</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Curriculum Implementation Division">Curriculum Implementation Division</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Medical and Dental">Medical and Dental</option>
+                        <option value="Office of the Assistant School Division Superintendent">Office of the Assistant School Division Superintendent</option>
+                        <option value="Personnel">Personnel</option>
+                        <option value="SGOD - DRS">SGOD - DRS</option>
+                        <option value="SGOD - EPS">SGOD - EPS</option>
+                        <option value="SGOD - HROS">SGOD - HROS</option>
+                        <option value="SGOD - SMME">SGOD - SMME</option>
+                        <option value="SGOD - SMNS">SGOD - SMNS</option>
+                        <option value="SGOD - Special Programs">SGOD - Special Programs</option>
+                        <option value="SGOD - YPS">SGOD - YPS</option>
+                        <option value="Supply">Supply</option>
+                    </select>
+                </div>
+            </div>
+
             <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
             <textarea type="text" id="description" rows="4" cols="50" name="description" required
             class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300"></textarea>
@@ -115,22 +176,6 @@
             <label for="file" class="block text-sm font-medium text-gray-700 mb-2">Attach File</label>
             <input type="file" id="file" name="file" accept="application/pdf" required
                 class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
-
-            <!-- Flex layout for lg and md screens -->
-            <!-- <div class="lg:flex">
-                <div class="lg:w-1/2 lg:pr-4">
-                    <label for="projectDescription"
-                        class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                    <input id="projectDescription"
-                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300"></input>
-                </div>
-                <div class="lg:w-1/2">
-                    <label for="inviteFriend" class="block text-sm font-medium text-gray-700 mb-2">Invite
-                        Friend</label>
-                    <input type="text" id="inviteFriend"
-                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
-                </div>
-            </div> -->
 
             <div class="flex justify-end">
                 <button type="submit"
@@ -159,7 +204,42 @@
             <label for="documentTitle" class="block text-sm font-medium text-gray-700 mb-2">Document Title</label>
             <input type="text" id="documentTitle" name="title" required
                 class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
-            
+
+            <!-- Flex layout for lg and md screens -->
+            <div class="lg:flex">
+                <div class="lg:w-1/2 lg:pr-4">
+                    <label for="communication" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="communication" name="communication" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
+                <div class="lg:w-1/2">
+                    <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Communication Type</label>
+                    <select id="category" name="category" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="Accounting">Accounting</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Budget">Budget</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Curriculum Implementation Division">Curriculum Implementation Division</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Medical and Dental">Medical and Dental</option>
+                        <option value="Office of the Assistant School Division Superintendent">Office of the Assistant School Division Superintendent</option>
+                        <option value="Personnel">Personnel</option>
+                        <option value="SGOD - DRS">SGOD - DRS</option>
+                        <option value="SGOD - EPS">SGOD - EPS</option>
+                        <option value="SGOD - HROS">SGOD - HROS</option>
+                        <option value="SGOD - SMME">SGOD - SMME</option>
+                        <option value="SGOD - SMNS">SGOD - SMNS</option>
+                        <option value="SGOD - Special Programs">SGOD - Special Programs</option>
+                        <option value="SGOD - YPS">SGOD - YPS</option>
+                        <option value="Supply">Supply</option>
+                    </select>
+                </div>
+            </div>
+
             <label for="documentDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
             <textarea type="text" id="documentDescription" rows="4" cols="50" name="description" required
             class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300"></textarea>
