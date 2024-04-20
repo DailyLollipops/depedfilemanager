@@ -35,9 +35,11 @@
             </div>
             <div class="w-full flex justify-center p-1 mb-4">
                 <form action="/filemanager/search" method="GET" id="search" class="relative w-full">
+                    <input type="text" id="filter-category" name="category" class="hidden" value="{{ category }}">
+                    <input type="text" id="filter-communication" name="communication" class="hidden" value="{{ communication }}">
                     <input type="text" id="query" name="query"
                         class="w-full backdrop-blur-sm bg-white/20 py-2 pl-10 pr-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300"
-                        placeholder="Search...">
+                        placeholder="Search..." value="{{ query }}">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -45,7 +47,23 @@
                                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </div>
+                    <div class="absolute inset-y-0 right-0 pr-5 flex items-center hover:cursor-pointer" onclick="openFilterModal()">
+                        <svg class="w-4 h-4 text-gray-800 dark:text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 6H19M21 12H16M21 18H16M7 20V13.5612C7 13.3532 7 13.2492 6.97958 13.1497C6.96147 13.0615 6.93151 12.9761 6.89052 12.8958C6.84431 12.8054 6.77934 12.7242 6.64939 12.5617L3.35061 8.43826C3.22066 8.27583 3.15569 8.19461 3.10948 8.10417C3.06849 8.02393 3.03853 7.93852 3.02042 7.85026C3 7.75078 3 7.64677 3 7.43875V5.6C3 5.03995 3 4.75992 3.10899 4.54601C3.20487 4.35785 3.35785 4.20487 3.54601 4.10899C3.75992 4 4.03995 4 4.6 4H13.4C13.9601 4 14.2401 4 14.454 4.10899C14.6422 4.20487 14.7951 4.35785 14.891 4.54601C15 4.75992 15 5.03995 15 5.6V7.43875C15 7.64677 15 7.75078 14.9796 7.85026C14.9615 7.93852 14.9315 8.02393 14.8905 8.10417C14.8443 8.19461 14.7793 8.27583 14.6494 8.43826L11.3506 12.5617C11.2207 12.7242 11.1557 12.8054 11.1095 12.8958C11.0685 12.9761 11.0385 13.0615 11.0204 13.1497C11 13.2492 11 13.3532 11 13.5612V17L7 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
                 </form>
+            </div>
+            <div class="grid grid-cols-2 justify-items-end">
+                <div class="div"></div>
+                <div class="grid pr-4 w-3/4">
+                    <select id="communication-filter" name="communication" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="all">All</option>
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
 
@@ -118,6 +136,58 @@
         </div>
     </div>
 
+    <!-- Filter Modal -->
+    <div id="filterModal"
+    class="fixed inset-0 top z-10 overflow-hidden backdrop-blur-lg hidden flex items-center justify-center transition-transform duration-300">
+        <div
+            class="modal-container p-6 backdrop-blur-sm bg-white/90 w-11/12 sm:w-11/12 md:w-8/12 lg:w-6/12 rounded-md shadow-sm">
+
+            <!-- Flex layout for lg and md screens -->
+            <div class="lg:flex">
+                <div class="lg:w-1/2 lg:pr-4">
+                    <label for="filter-option-communication" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select id="filter-option-communication" name="communication" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="all">All</option>
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
+                <div class="lg:w-1/2">
+                    <label for="filter-option-category" class="block text-sm font-medium text-gray-700 mb-2">Communication Type</label>
+                    <select id="filter-option-category" name="category" required
+                        class="w-full p-2 mb-4 rounded-lg focus:outline-none border-2 border-gray-100 focus:border-violet-300 transition-colors duration-300">
+                        <option value="all">All</option>
+                        <option value="Accounting">Accounting</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Budget">Budget</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Curriculum Implementation Division">Curriculum Implementation Division</option>
+                        <option value="Legal">Legal</option>
+                        <option value="Medical and Dental">Medical and Dental</option>
+                        <option value="Office of the Assistant School Division Superintendent">Office of the Assistant School Division Superintendent</option>
+                        <option value="Personnel">Personnel</option>
+                        <option value="SGOD - DRS">SGOD - DRRM</option>
+                        <option value="SGOD - DRS">SGOD - DRS</option>
+                        <option value="SGOD - EPS">SGOD - EPS</option>
+                        <option value="SGOD - HROS">SGOD - HROS</option>
+                        <option value="SGOD - SMME">SGOD - SMME</option>
+                        <option value="SGOD - SMNS">SGOD - SMNS</option>
+                        <option value="SGOD - Special Programs">SGOD - Special Programs</option>
+                        <option value="SGOD - YPS">SGOD - YPS</option>
+                        <option value="Supply">Supply</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="button"
+                    class="bg-gradient-to-r from-gray-100 to-slate-200  border border-fuchsia-00 hover:border-violet-100 text-gray-800 font-semibold py-2 px-4 rounded-md transition-colors duration-300"
+                    onclick="closeFilterModal()">Confirm</button>
+            </div>  
+        </div>
+    </div>
+
     <!-- Add Document Modal -->
     <div id="addModal"
     class="fixed inset-0 top z-10 overflow-hidden backdrop-blur-lg hidden flex items-center justify-center transition-transform duration-300">
@@ -157,6 +227,7 @@
                         <option value="Medical and Dental">Medical and Dental</option>
                         <option value="Office of the Assistant School Division Superintendent">Office of the Assistant School Division Superintendent</option>
                         <option value="Personnel">Personnel</option>
+                        <option value="SGOD - DRS">SGOD - DRRM</option>
                         <option value="SGOD - DRS">SGOD - DRS</option>
                         <option value="SGOD - EPS">SGOD - EPS</option>
                         <option value="SGOD - HROS">SGOD - HROS</option>
@@ -228,6 +299,7 @@
                         <option value="Medical and Dental">Medical and Dental</option>
                         <option value="Office of the Assistant School Division Superintendent">Office of the Assistant School Division Superintendent</option>
                         <option value="Personnel">Personnel</option>
+                        <option value="SGOD - DRS">SGOD - DRRM</option>
                         <option value="SGOD - DRS">SGOD - DRS</option>
                         <option value="SGOD - EPS">SGOD - EPS</option>
                         <option value="SGOD - HROS">SGOD - HROS</option>
@@ -278,6 +350,44 @@
     </div>
 
     <script>
+        searchForm = document.getElementById("search");
+        filterCategory = document.getElementById("filter-category");
+        filterCommunication = document.getElementById("filter-communication");
+        categoryFilterOption = document.getElementById("filter-option-category");
+        communicationFilterOption = document.getElementById("filter-option-communication");
+
+        categoryFilterOption.value = "{{ category }}";
+        communicationFilterOption.value = "{{ communication }}";
+
+        communicationFilter = document.getElementById("communication-filter");
+        communicationFilter.value = "{{ communication }}";
+
+
+        document.getElementById("query").addEventListener("keyup", function(event){
+            if (event.keyCode != 13) {
+                return;
+            }
+            searchForm.submit();
+        });
+
+        communicationFilter.addEventListener('change', function() {
+            filterCommunication.value = communicationFilter.value;
+            filterCategory = 'all';
+            searchForm.submit();
+        });
+
+        function openFilterModal() {
+            document.getElementById("filterModal").classList.remove("hidden");
+        }
+
+        function closeFilterModal() {
+            var selectedCategory = document.getElementById("filter-option-category").value;
+            var selectedCommunication = document.getElementById("filter-option-communication").value;
+            filterCategory.value = selectedCategory;
+            filterCommunication.value = selectedCommunication;
+            document.getElementById("filterModal").classList.add("hidden");
+        }
+
         function openAddModal() {
             document.getElementById("addModal").classList.remove("hidden");
         }

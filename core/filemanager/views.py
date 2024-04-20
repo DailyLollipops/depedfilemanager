@@ -10,24 +10,40 @@ def home(request: HttpRequest):
     documents = Document.objects.all()
     context = {
         'documents': documents,
+        'query': '',
+        'category': 'all',
+        'communication': 'all',
     }
     return render(request, 'home.html', context=context)
 
 
 
 def search(request: HttpRequest):
-    params = ['query']
+    params = ['query', 'category', 'communication']
     if not paramutils.validate_params(request.GET, params):
         return redirect('/filemanager')
     
     query = request.GET.get('query')
-    documents = Document.objects.filter(
-        Q(name__icontains=query) | 
-        Q(title__icontains=query) |
-        Q(description__icontains=query)
-    )
+    category = request.GET.get('category')
+    communication = request.GET.get('communication')
+
+    documents = Document.objects.all()
+    if query:
+        documents = documents.filter(
+            Q(name__icontains=query) | 
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+    if category and category != 'all':
+        documents = documents.filter(category__exact=category)
+    if communication and communication != 'all':
+        documents = documents.filter(communication__exact=communication)
+
     context = {
         'documents': documents,
+        'query': query,
+        'category': category,
+        'communication': communication,
     }
     return render(request, 'home.html', context=context)
 
